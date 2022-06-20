@@ -1,14 +1,19 @@
 import axios from "axios";
-import { useState } from "react";
-
-import "./App.css";
+import React, { useState, useRef, useEffect } from "react";
 
 function App() {
-  // const apiKey = '6e75a0730264c2386f68ef0d04cad813'
-  // const url = `https://api.openweathermap.org/data/2.5/weather?q=dallas&appid=${apiKey}`
-
   return (
     <div className="app">
+      <div className="search">
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          onKeyDown={searchLocation}
+          placeholder="Enter location"
+          ref={inputRef}
+        />
+      </div>
       <div className="container">
         <div className="top">
           <div className="location">
@@ -23,13 +28,16 @@ function App() {
         </div>
         <div className="bottom">
           <div className="feels">
-            <p>65°F</p>
+            <p className="bold">65°F</p>
+            <p>Feels like</p>
           </div>
           <div className="humidity">
-            <p>20%</p>
+            <p className="bold">20%</p>
+            <p>Humidity</p>
           </div>
           <div className="wind">
-            <p>12 MPH</p>
+            <p className="bold">12 MPH</p>
+            <p>Wind</p>
           </div>
         </div>
       </div>
