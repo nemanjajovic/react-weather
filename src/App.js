@@ -2,6 +2,27 @@ import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 
 function App() {
+  const [data, setData] = useState({});
+  const [location, setLocation] = useState("");
+  const inputRef = useRef(React.createRef());
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  const apiKey = "6e75a0730264c2386f68ef0d04cad813";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+
+  const searchLocation = (e) => {
+    if (e.key === "Enter") {
+      axios.get(url).then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      });
+      setLocation("");
+    }
+  };
+
   return (
     <div className="app">
       <div className="search">
@@ -17,29 +38,35 @@ function App() {
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>Dallas</p>
+            {data.name ? <p>{data.name}</p> : null}
           </div>
           <div className="temp">
-            <h1>65°F</h1>
+            {data.main ? <h1>{Math.floor(data.main.temp)}°C</h1> : null}
           </div>
           <div className="description">
-            <p>Clouds</p>
+            {data.weather ? <p>{data.weather[0].main}</p> : null}
           </div>
         </div>
-        <div className="bottom">
-          <div className="feels">
-            <p className="bold">65°F</p>
-            <p>Feels like</p>
+        {data.main ? (
+          <div className="bottom">
+            <div className="feels">
+              {data.main ? (
+                <p className="bold">{Math.floor(data.main.feels_like)}°C</p>
+              ) : null}
+              <p>Feels like</p>
+            </div>
+            <div className="humidity">
+              {data.main ? <p className="bold">{data.main.humidity}%</p> : null}
+              <p>Humidity</p>
+            </div>
+            <div className="wind">
+              {data.wind ? (
+                <p className="bold">{Math.floor(data.wind.speed)} km/h</p>
+              ) : null}
+              <p>Wind</p>
+            </div>
           </div>
-          <div className="humidity">
-            <p className="bold">20%</p>
-            <p>Humidity</p>
-          </div>
-          <div className="wind">
-            <p className="bold">12 MPH</p>
-            <p>Wind</p>
-          </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );
