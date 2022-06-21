@@ -25,6 +25,8 @@ function App() {
 
   return (
     <div className="app">
+      <h1 className="title">React weather</h1>
+      <p className="subtitle">Type any city name and press Enter</p>
       <div className="search">
         <input
           type="text"
