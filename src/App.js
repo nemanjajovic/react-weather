@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="title">React weather</h1>
+      <h1>React weather</h1>
       <p className="subtitle">Type any city name and press Enter</p>
       <div className="search">
         <input
@@ -49,7 +49,7 @@ function App() {
             {data.name ? <p>{data.name}</p> : null}
           </div>
           <div className="temp">
-            {data.main ? <h1>{Math.floor(data.main.temp)}°C</h1> : null}
+            {data.main ? <h2>{data.main.temp.toFixed(0)}°C</h2> : null}
           </div>
           <div className="description">
             {data.weather ? <p>{data.weather[0].main}</p> : null}
@@ -58,19 +58,15 @@ function App() {
         {data.main ? (
           <div className="bottom">
             <div className="feels">
-              {data.main ? (
-                <p className="bold">{Math.floor(data.main.feels_like)}°C</p>
-              ) : null}
+              {data.main ? <p>{data.main.feels_like.toFixed(0)}°C</p> : null}
               <p>Feels like</p>
             </div>
             <div className="humidity">
-              {data.main ? <p className="bold">{data.main.humidity}%</p> : null}
+              {data.main ? <p>{data.main.humidity}%</p> : null}
               <p>Humidity</p>
             </div>
             <div className="wind">
-              {data.wind ? (
-                <p className="bold">{Math.floor(data.wind.speed)} km/h</p>
-              ) : null}
+              {data.wind ? <p>{data.wind.speed.toFixed(0)} km/h</p> : null}
               <p>Wind</p>
             </div>
           </div>
