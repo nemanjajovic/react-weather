@@ -3,11 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState({});
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(
+    localStorage.getItem("city") === null ? "" : localStorage.getItem("city")
+  );
   const inputRef = useRef(React.createRef());
 
   useEffect(() => {
     inputRef.current.focus();
+
+    axios.get(url).then((res) => setData(res.data));
+
+    setLocation("");
   }, []);
 
   const apiKey = "6e75a0730264c2386f68ef0d04cad813";
@@ -17,7 +23,7 @@ function App() {
     if (e.key === "Enter") {
       axios.get(url).then((res) => {
         setData(res.data);
-        console.log(res.data);
+        localStorage.setItem("city", res.data.name);
       });
       setLocation("");
     }
