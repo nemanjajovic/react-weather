@@ -1,14 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useStateContext } from "../context/ContextProvider";
 
 const CurrentWeather = () => {
-  const { inputRef, data } = useStateContext();
-
-  useEffect(() => {
-    // Focus input field on page load
-    inputRef.current.focus();
-  }, []);
+  const { data } = useStateContext();
 
   return (
     <div className="container">

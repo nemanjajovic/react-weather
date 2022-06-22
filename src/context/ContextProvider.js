@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 import axios from "axios";
 
 const StateContext = createContext();
@@ -23,6 +29,11 @@ export const ContextProvider = ({ children }) => {
       inputRef.current.blur();
     }
   };
+
+  useEffect(() => {
+    // Focus input field on page load
+    inputRef.current.focus();
+  }, []);
 
   return (
     <StateContext.Provider
