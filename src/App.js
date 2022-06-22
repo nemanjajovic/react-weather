@@ -1,15 +1,27 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
+import { useStateContext } from "./context/ContextProvider";
+
 import CurrentWeather from "./pages/CurrentWeather";
 import WeekForecast from "./pages/WeekForecast";
 
 function App() {
+  const { inputRef, location, setLocation, searchLocation } = useStateContext();
+
   return (
     <div className="app">
-      {/* <h1>React weather</h1>
-      <p className="subtitle">Type any city name and press Enter</p> */}
-      <div className="link">
+      <div className="search">
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          onKeyDown={searchLocation}
+          placeholder="Enter location"
+          ref={inputRef}
+        />
+      </div>
+      <div className="links">
         <Link className="link-item" to={"/"}>
           Today's forecast
         </Link>
@@ -17,8 +29,6 @@ function App() {
           Week Forecast
         </Link>
       </div>
-      {/* <CurrentWeather /> */}
-
       <Routes>
         <Route path="/" element={<CurrentWeather />} />
         <Route path="/week-forecast" element={<WeekForecast />} />

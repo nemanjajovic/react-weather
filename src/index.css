@@ -120,14 +120,14 @@ h2 {
   background-color: rgba(255,255,255,0.2);
 }
 
-.link {
+.links {
   display: flex;
   padding: 2rem 2rem;
   flex-direction: row;
   justify-content: space-around;
 }
 
-.link .link-item {
+.links .link-item {
   font-weight: 300;
   color: #fff;
   text-decoration: none;
