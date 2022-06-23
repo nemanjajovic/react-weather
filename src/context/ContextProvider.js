@@ -50,7 +50,11 @@ export const ContextProvider = ({ children }) => {
         .get(
           `https://api.openweathermap.org/data/2.5/weather?q=${savedLocation}&units=metric&appid=${apiKey}`
         )
-        .then((res) => setData(res.data));
+        .then((res) => {
+          setData(res.data);
+          // Update local storage with new data object after refresh
+          localStorage.setItem("data", JSON.stringify(res.data));
+        });
     }
   };
 
