@@ -37,6 +37,23 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
+  // send another GET request after hitting Refresh button
+  const refreshLocation = () => {
+    // We get a city name from localStorage because location state resets after input submit
+    // Its a bit messed up here, turn your brain at least to 50% capacity
+    let savedLocation =
+      localStorage.getItem("data") !== null
+        ? JSON.parse(localStorage.getItem("data")).name
+        : null;
+    if (savedLocation !== null) {
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${savedLocation}&units=metric&appid=${apiKey}`
+        )
+        .then((res) => setData(res.data));
+    }
+  };
+
   useEffect(() => {
     // Focus input field on page load
     inputRef.current.focus();
@@ -50,6 +67,7 @@ export const ContextProvider = ({ children }) => {
         setLocation,
         inputRef,
         searchLocation,
+        refreshLocation,
       }}
     >
       {children}
