@@ -17,10 +17,12 @@ function App() {
           Week Forecast
         </Link>
       </div>
-      <Routes>
-        <Route path="/" element={<CurrentWeather />} />
-        <Route path="/week-forecast" element={<WeekForecast />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<CurrentWeather />} />
+          <Route path="/week-forecast" element={<WeekForecast />} />
+        </Routes>
+      </div>
     </div>
   );
 }

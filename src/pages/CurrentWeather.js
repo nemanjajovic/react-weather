@@ -8,7 +8,7 @@ const CurrentWeather = () => {
   const { data } = useStateContext();
 
   return (
-    <div className="container">
+    <div>
       <Header />
       {data.main ? (
         <div className="bottom">
