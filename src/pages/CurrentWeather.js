@@ -8,7 +8,7 @@ const CurrentWeather = () => {
   const { data } = useStateContext();
 
   return (
-    <div>
+    <>
       <Header />
       {data.main ? (
         <div className="bottom">
@@ -29,7 +29,7 @@ const CurrentWeather = () => {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

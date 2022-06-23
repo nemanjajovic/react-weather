@@ -5,7 +5,7 @@ import { useStateContext } from "../context/ContextProvider";
 const Header = () => {
   const { data } = useStateContext();
   return (
-    <div>
+    <>
       <div className="top">
         <div className="location">{data.name ? <p>{data.name}</p> : null}</div>
         {data.coord ? (
@@ -21,7 +21,7 @@ const Header = () => {
           {data.weather ? <p>{data.weather[0].main}</p> : null}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
