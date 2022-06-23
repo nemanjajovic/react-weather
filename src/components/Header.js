@@ -8,6 +8,9 @@ const Header = () => {
     <div>
       <div className="top">
         <div className="location">{data.name ? <p>{data.name}</p> : null}</div>
+        {data.coord ? (
+          <p>{`lon: ${data.coord.lon} / lat: ${data.coord.lat}`}</p>
+        ) : null}
         <div className="temp">
           {/* Added +1 degree for better accuracy, disable if necessary */}
           {data.main ? (

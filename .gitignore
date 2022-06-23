@@ -27,4 +27,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # data reference
-data.json
+currentWeather.json
+weekForecast.json
