@@ -16,7 +16,11 @@ export const ContextProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("data"))
       : {}
   );
-  const [forecast, setForecast] = useState([]);
+  const [forecast, setForecast] = useState(
+    localStorage.getItem("forecast") !== null
+      ? JSON.parse(localStorage.getItem("forecast"))
+      : []
+  );
   const [location, setLocation] = useState("");
   const inputRef = useRef(React.createRef());
 
@@ -47,7 +51,7 @@ export const ContextProvider = ({ children }) => {
           item.dt_txt.includes("12:00:00")
         );
         setForecast(filteredData);
-        console.log(forecast);
+        localStorage.setItem("forecast", JSON.stringify(filteredData));
       });
 
       // Clear and unfocus the input field
@@ -73,6 +77,19 @@ export const ContextProvider = ({ children }) => {
           // Update local storage with new data object after refresh
           localStorage.setItem("data", JSON.stringify(res.data));
         });
+
+      // Refresh local storage with new forecast if necessary
+      // axios
+      //   .get(
+      //     `https://api.openweathermap.org/data/2.5/forecast?q=${savedLocation}&appid=${apiKey}`
+      //   )
+      //   .then((res) => {
+      //     const filteredData = res.data.list.filter((item) =>
+      //       item.dt_txt.includes("12:00:00")
+      //     );
+      //     setForecast(filteredData);
+      //     localStorage.setItem("forecast", JSON.stringify(filteredData));
+      //   });
     }
   };
 

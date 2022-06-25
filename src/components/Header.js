@@ -4,6 +4,23 @@ import { useStateContext } from "../context/ContextProvider";
 
 const Header = () => {
   const { data } = useStateContext();
+
+  let translation = "";
+
+  if (localStorage.getItem("data") !== null) {
+    switch (data.weather[0].main) {
+      case "Clouds":
+        translation = "Oblacno";
+        break;
+      case "Rain":
+        translation = "Kisovito";
+        break;
+      default:
+        translation = data.weather[0].main;
+        break;
+    }
+  }
+
   return (
     <>
       <div className="top">
@@ -18,7 +35,8 @@ const Header = () => {
           ) : null}
         </div>
         <div className="description">
-          {data.weather ? <p>{data.weather[0].main}</p> : null}
+          {/* data.weather[0].main */}
+          {data.weather ? <p>{translation}</p> : null}
         </div>
       </div>
     </>

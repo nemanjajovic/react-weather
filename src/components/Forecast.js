@@ -5,13 +5,15 @@ import { useStateContext } from "../context/ContextProvider";
 const Forecast = () => {
   const { forecast } = useStateContext();
   return (
-    <div>
-      <ul>
+    <>
+      <ul className="list">
         {forecast.map((item, index) => (
-          <li key={index}>{item.main.temp}</li>
+          <li className="list-item" key={index}>
+            {item.main.temp}
+          </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

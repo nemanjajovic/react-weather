@@ -9,14 +9,14 @@ const Links = () => {
     <div className="options">
       <div className="links">
         <Link className="link-item" to={"/"}>
-          Today's forecast
+          Trenutni detalji
         </Link>
         <Link className="link-item" to={"/week-forecast"}>
-          Week Forecast
+          Prognoza 5 dana
         </Link>
       </div>
       <button onClick={refreshLocation} className="refresh">
-        Refresh
+        Osvjezi
       </button>
     </div>
   );

@@ -13,7 +13,7 @@ const Search = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           onKeyDown={searchLocation}
-          placeholder="Enter location"
+          placeholder="Unesi lokaciju"
           ref={inputRef}
         />
       </div>
