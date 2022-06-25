@@ -32,7 +32,7 @@ export const ContextProvider = ({ children }) => {
 
   const apiKey = "6e75a0730264c2386f68ef0d04cad813";
   const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
-  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
+  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
 
   // send GET request
   const searchLocation = (e) => {

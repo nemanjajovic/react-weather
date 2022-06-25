@@ -4,15 +4,20 @@ import { useStateContext } from "../context/ContextProvider";
 
 const Forecast = () => {
   const { forecast } = useStateContext();
+
   return (
     <>
-      <ul className="list">
+      <div className="list">
         {forecast.map((item, index) => (
-          <li className="list-item" key={index}>
-            {item.main.temp}
-          </li>
+          <div className="list-items" key={index}>
+            <p>{`${item.main.temp.toFixed()}°C`}</p>
+            <img
+              src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+              alt="icon"
+            />
+          </div>
         ))}
-      </ul>
+      </div>
     </>
   );
 };

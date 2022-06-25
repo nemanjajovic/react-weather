@@ -76,6 +76,7 @@ p {
 
 .options {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -96,12 +97,12 @@ p {
   text-align: center;
 }
 
-.link-item:hover {
-  text-decoration: underline;
-}
-
-.links > :first-child {
-  border-right: 1px solid #fff;
+.separator {
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .refresh {
@@ -109,11 +110,9 @@ p {
   color: #fff;
   border: none;
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-}
-.refresh:hover {
-  text-decoration: underline;
+  margin-left: -1rem;
 }
 
 .container {
@@ -134,18 +133,19 @@ p {
 
 .app .location {
   font-size: 1.3rem;
-  font-weight: 300;
 }
 
-.app .coord {
-  font-weight: 300;
+.temp-container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .app .description {
   position: relative;
   right:  -90%;
   transform-origin: 0 0;
-  transform: rotate(269deg);
+  transform: rotate(270deg);
   font-size: 1.3rem;
   font-weight: 300;
 }
@@ -172,12 +172,16 @@ p {
   
 }
 
-.list-item {
+.list-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   font-weight: 300;
   padding: 0.3rem 0.3rem;
   margin: 0.3rem 0rem;
   background-color: rgba(255,255,255,0.2);
-  display: inline-block;
+  /* display: inline-block; */
   width: 100%;
   border-radius: 12px;
 }
@@ -208,6 +212,14 @@ p {
 @media only screen and (min-width: 1100px){
   .container {
     top: 15%;
+  }
+
+  .link-item:hover {
+    text-decoration: underline;
+  }
+
+  .refresh:hover {
+    text-decoration: underline;
   }
 }
 

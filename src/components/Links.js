@@ -11,6 +11,7 @@ const Links = () => {
         <Link className="link-item" to={"/"}>
           Trenutni detalji
         </Link>
+        <div className="separator">|</div>
         <Link className="link-item" to={"/week-forecast"}>
           Prognoza 5 dana
         </Link>

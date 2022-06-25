@@ -5,16 +5,21 @@ import { useStateContext } from "../context/ContextProvider";
 const Header = () => {
   const { data } = useStateContext();
 
+  // Translate weather to serbian
   let translation = "";
 
   if (localStorage.getItem("data") !== null) {
     switch (data.weather[0].main) {
+      case "Clear":
+        translation = "Suncano";
+        break;
       case "Clouds":
         translation = "Oblacno";
         break;
       case "Rain":
         translation = "Kisovito";
         break;
+
       default:
         translation = data.weather[0].main;
         break;
@@ -28,11 +33,19 @@ const Header = () => {
         {data.coord ? (
           <p className="coord">{`lon: ${data.coord.lon} / lat: ${data.coord.lat}`}</p>
         ) : null}
-        <div className="temp">
-          {/* Added +1 degree for better accuracy, disable if necessary */}
-          {data.main ? (
-            <h2>{parseInt(data.main.temp.toFixed(0)) + 1}°C</h2>
-          ) : null}
+        <div className="temp-container">
+          <div className="temp">
+            {/* Added +1 degree for better accuracy, disable if necessary */}
+            {data.main ? (
+              <h2>{parseInt(data.main.temp.toFixed(0)) + 1}°C</h2>
+            ) : null}
+          </div>
+          <div className="img">
+            <img
+              src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+              alt="icon"
+            />
+          </div>
         </div>
         <div className="description">
           {/* data.weather[0].main */}
