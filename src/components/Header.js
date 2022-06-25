@@ -42,7 +42,7 @@ const Header = () => {
           </div>
           <div className="img">
             <img
-              src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+              src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
               alt="icon"
             />
           </div>

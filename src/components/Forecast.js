@@ -12,7 +12,7 @@ const Forecast = () => {
           <div className="list-items" key={index}>
             <p>{`${item.main.temp.toFixed()}°C`}</p>
             <img
-              src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+              src={`https://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
               alt="icon"
             />
           </div>
