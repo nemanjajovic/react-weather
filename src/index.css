@@ -178,8 +178,8 @@ p {
   justify-content: space-evenly;
   align-items: center;
   font-weight: 300;
-  padding: 0.3rem 0.3rem;
-  margin: 0.3rem 0rem;
+  padding: 0rem 0.3rem;
+  margin: 0.1rem 0rem;
   background-color: rgba(255,255,255,0.2);
   /* display: inline-block; */
   width: 100%;
