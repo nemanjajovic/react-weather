@@ -29,3 +29,4 @@ yarn-error.log*
 # data reference
 currentWeather.json
 weekForecast.json
+test.json

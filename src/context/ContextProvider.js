@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import axios from "axios";
+
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -15,22 +16,40 @@ export const ContextProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("data"))
       : {}
   );
+  const [forecast, setForecast] = useState([]);
   const [location, setLocation] = useState("");
   const inputRef = useRef(React.createRef());
 
-  // https://api.openweathermap.org/data/2.5/weather?q=banjaluka&units=metric&appid=6e75a0730264c2386f68ef0d04cad813
+  // 5days api
+  // https://api.openweathermap.org/data/2.5/forecast?q=mumbai&appid=6e75a0730264c2386f68ef0d04cad813
+
+  // FILTER DAYS FROM RESPONSE
+  //   response.list.filter((item) => item.dt_txt.includes("00:00:00"))
+
   const apiKey = "6e75a0730264c2386f68ef0d04cad813";
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+  const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
 
   // send GET request
   const searchLocation = (e) => {
     if (e.key === "Enter") {
-      // Send request to specified URL and retrieve the data
-      axios.get(url).then((res) => {
+      // Send request to specified URL and retrieve the current weather
+
+      axios.get(urlCurrent).then((res) => {
         setData(res.data);
         // Sends a stringified data to local storage
         localStorage.setItem("data", JSON.stringify(res.data));
       });
+
+      // Send request to retrieve the forecast weather
+      axios.get(urlForecast).then((res) => {
+        const filteredData = res.data.list.filter((item) =>
+          item.dt_txt.includes("12:00:00")
+        );
+        setForecast(filteredData);
+        console.log(forecast);
+      });
+
       // Clear and unfocus the input field
       setLocation("");
       inputRef.current.blur();
@@ -40,7 +59,6 @@ export const ContextProvider = ({ children }) => {
   // send another GET request after hitting Refresh button
   const refreshLocation = () => {
     // We get a city name from localStorage because location state resets after input submit
-    // Its a bit messed up here, turn your brain at least to 50% capacity
     let savedLocation =
       localStorage.getItem("data") !== null
         ? JSON.parse(localStorage.getItem("data")).name
@@ -72,6 +90,7 @@ export const ContextProvider = ({ children }) => {
         inputRef,
         searchLocation,
         refreshLocation,
+        forecast,
       }}
     >
       {children}
