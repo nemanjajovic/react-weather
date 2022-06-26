@@ -79,17 +79,17 @@ export const ContextProvider = ({ children }) => {
         });
 
       // Refresh local storage with new forecast if necessary
-      // axios
-      //   .get(
-      //     `https://api.openweathermap.org/data/2.5/forecast?q=${savedLocation}&appid=${apiKey}`
-      //   )
-      //   .then((res) => {
-      //     const filteredData = res.data.list.filter((item) =>
-      //       item.dt_txt.includes("12:00:00")
-      //     );
-      //     setForecast(filteredData);
-      //     localStorage.setItem("forecast", JSON.stringify(filteredData));
-      //   });
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${savedLocation}&units=metric&appid=${apiKey}`
+        )
+        .then((res) => {
+          const filteredData = res.data.list.filter((item) =>
+            item.dt_txt.includes("12:00:00")
+          );
+          setForecast(filteredData);
+          localStorage.setItem("forecast", JSON.stringify(filteredData));
+        });
     }
   };
 
