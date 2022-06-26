@@ -8,7 +8,7 @@ import Links from "./components/Links";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app noselect">
       <Search />
       <Links />
       <div className="container">
