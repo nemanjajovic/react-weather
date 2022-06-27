@@ -1,14 +1,13 @@
-import React from "react";
-
 import { useStateContext } from "../context/ContextProvider";
 
 const Header = () => {
   const { data } = useStateContext();
 
-  // Translate weather to serbian
+  // Translate weather to Serbian
   let translation = "";
 
-  if (localStorage.getItem("data") !== null) {
+  // Check if data is fetched from API first, then do the logic
+  if (data.weather) {
     switch (data.weather[0].main) {
       case "Clear":
         translation = "Suncano";
@@ -28,30 +27,29 @@ const Header = () => {
 
   return (
     <>
-      <div className="top">
-        <div className="location">{data.name ? <p>{data.name}</p> : null}</div>
-        {data.coord ? (
+      {/* Check if data is fetched from API first, then do the logic */}
+      {data.weather ? (
+        <div className="top">
+          <div className="location">
+            <p>{data.name}</p>
+          </div>
           <p className="coord">{`lon: ${data.coord.lon} / lat: ${data.coord.lat}`}</p>
-        ) : null}
-        <div className="temp-container">
-          <div className="temp">
-            {/* Added +1 degree for better accuracy, disable if necessary */}
-            {data.main ? (
+          <div className="temp-container">
+            <div className="temp">
               <h2>{parseInt(data.main.temp.toFixed(0)) + 1}°C</h2>
-            ) : null}
+            </div>
+            <div className="img">
+              <img
+                src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+                alt="icon"
+              />
+            </div>
           </div>
-          <div className="img">
-            <img
-              src={`https://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
-              alt="icon"
-            />
+          <div className="description">
+            <p>{translation}</p>
           </div>
         </div>
-        <div className="description">
-          {/* data.weather[0].main */}
-          {data.weather ? <p>{translation}</p> : null}
-        </div>
-      </div>
+      ) : null}
     </>
   );
 };

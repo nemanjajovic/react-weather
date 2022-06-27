@@ -60,8 +60,6 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  // console.log(data)
-
   // send another GET request after hitting Refresh button
   const refreshLocation = () => {
     // We get a city name from localStorage because location state resets after input submit
@@ -95,20 +93,26 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  // Get next 5 days depending on todays day
   const today = new Date().getDay();
-  let dayList = ["Nedelja", "Ponedeljak", "Utorak", "Srijeda", "Cetvrtak", "Petak", "Subota"];
-  let newDayList = [];
-  for(let i=1; i < 6 ; i++){
-    let day = (today + i) % 7
-    newDayList.push(dayList[day])
+  const dayList = [
+    "Nedelja",
+    "Ponedeljak",
+    "Utorak",
+    "Srijeda",
+    "Cetvrtak",
+    "Petak",
+    "Subota",
+  ];
+  let filteredDayList = [];
+  // Get next 5 days depending on todays day
+  for (let i = 1; i < 6; i++) {
+    let day = (today + i) % 7;
+    filteredDayList.push(dayList[day]);
   }
-  console.log(newDayList);
-  
+
   useEffect(() => {
     // Focus input field on page load
     inputRef.current.focus();
-    // console.log(data.weather)
   }, []);
 
   return (
@@ -121,8 +125,7 @@ export const ContextProvider = ({ children }) => {
         searchLocation,
         refreshLocation,
         forecast,
-        // dayList,
-        newDayList
+        filteredDayList,
       }}
     >
       {children}
