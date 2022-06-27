@@ -60,6 +60,8 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
+  // console.log(data)
+
   // send another GET request after hitting Refresh button
   const refreshLocation = () => {
     // We get a city name from localStorage because location state resets after input submit
@@ -95,27 +97,18 @@ export const ContextProvider = ({ children }) => {
 
   // Get next 5 days depending on todays day
   const today = new Date().getDay();
-
-  let dayList = [];
-  if (today === 0) {
-    dayList = ["Ponedeljak", "Utorak", "Srijeda", "Cetvrtak", "Petak"];
-  } else if (today === 1) {
-    dayList = ["Utorak", "Srijeda", "Cetvrtak", "Petak", "Subota"];
-  } else if (today === 2) {
-    dayList = ["Srijeda", "Cetvrtak", "Petak", "Subota", "Nedelja"];
-  } else if (today === 3) {
-    dayList = ["Cetvrtak", "Petak", "Subota", "Nedelja", "Ponedeljak"];
-  } else if (today === 4) {
-    dayList = ["Petak", "Subota", "Nedelja", "Ponedeljak", "Utorak"];
-  } else if (today === 5) {
-    dayList = ["Subota", "Nedelja", "Ponedeljak", "Utorak", "Srijeda"];
-  } else if (today === 6) {
-    dayList = ["Nedelja", "Ponedeljak", "Utorak", "Srijeda", "Cetvrtak"];
+  let dayList = ["Nedelja", "Ponedeljak", "Utorak", "Srijeda", "Cetvrtak", "Petak", "Subota"];
+  let newDayList = [];
+  for(let i=1; i < 6 ; i++){
+    let day = (today + i) % 7
+    newDayList.push(dayList[day])
   }
-
+  console.log(newDayList);
+  
   useEffect(() => {
     // Focus input field on page load
     inputRef.current.focus();
+    // console.log(data.weather)
   }, []);
 
   return (
@@ -128,7 +121,8 @@ export const ContextProvider = ({ children }) => {
         searchLocation,
         refreshLocation,
         forecast,
-        dayList,
+        // dayList,
+        newDayList
       }}
     >
       {children}
