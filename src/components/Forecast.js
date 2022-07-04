@@ -5,8 +5,6 @@ const Forecast = () => {
 
   return (
     <>
-      {/* Check if data is fetched from API first, then do the logic */}
-      {/* {forecast.list ? ( */}
       <div className="list">
         {forecast.map((item, index) => (
           <div className="list-items" key={index}>
@@ -19,7 +17,6 @@ const Forecast = () => {
           </div>
         ))}
       </div>
-      {/* ) : null} */}
     </>
   );
 };
