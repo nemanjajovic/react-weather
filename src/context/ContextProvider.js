@@ -21,20 +21,16 @@ export const ContextProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("forecast"))
       : []
   );
+
   const [location, setLocation] = useState("");
   const inputRef = useRef(React.createRef());
 
-  // 5days api
-  // https://api.openweathermap.org/data/2.5/forecast?q=mumbai&appid=6e75a0730264c2386f68ef0d04cad813
-
-  // FILTER DAYS FROM RESPONSE
-  //   response.list.filter((item) => item.dt_txt.includes("00:00:00"))
-
   const apiKey = "6e75a0730264c2386f68ef0d04cad813";
+  // Current weather data API url
   const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+  // 5 days forecast data API url
   const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
 
-  // send GET request
   const searchLocation = (e) => {
     if (e.key === "Enter") {
       // Send request to specified URL and retrieve the current weather
@@ -47,6 +43,7 @@ export const ContextProvider = ({ children }) => {
 
       // Send request to retrieve the forecast weather
       axios.get(urlForecast).then((res) => {
+        // Filter the retrieved data by day
         const filteredData = res.data.list.filter((item) =>
           item.dt_txt.includes("12:00:00")
         );
@@ -60,7 +57,6 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  // send another GET request after hitting Refresh button
   const refreshLocation = () => {
     // We get a city name from localStorage because location state resets after input submit
     let savedLocation =
@@ -111,8 +107,11 @@ export const ContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // Focus input field on page load
+    // Focus input field on page load (once)
     inputRef.current.focus();
+
+    // Update data on page load (once)
+    refreshLocation();
   }, []);
 
   return (
