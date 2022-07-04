@@ -37,11 +37,11 @@ p {
   height: 100vh;
   position: relative;
   color: #fff;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.7);
 }
 
 .app:before {
-  background: url('./img/sunset.jpg') no-repeat center center/cover;
+  background: url('./img/clouds.jpg') no-repeat center center/cover;
   content: '';
   position: absolute;
   width: 100%;
