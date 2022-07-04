@@ -15,6 +15,9 @@ function App() {
           <Route path="/" element={<CurrentWeather />} />
           <Route path="/week-forecast" element={<WeekForecast />} />
         </Routes>
+        <div className="footer">
+          <a href="https://openweathermap.org/">Open Weather Map</a>
+        </div>
       </div>
     </div>
   );
