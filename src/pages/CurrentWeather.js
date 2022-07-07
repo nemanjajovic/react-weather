@@ -10,12 +10,9 @@ const CurrentWeather = () => {
       <Header />
       {data.main ? (
         <div className="bottom">
-          <div className="feels">
-            {/* Added +1 degree here too, disable if necessary */}
-            {data.main ? (
-              <p>{parseInt(data.main.feels_like.toFixed(0)) + 1}°C</p>
-            ) : null}
-            <p>Osjecaj</p>
+          <div className="pressure">
+            {data.main ? <p>{data.main.pressure} mBar</p> : null}
+            <p>Pritisak</p>
           </div>
           <div className="humidity">
             {data.main ? <p>{data.main.humidity}%</p> : null}
