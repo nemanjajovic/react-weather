@@ -27,9 +27,9 @@ export const ContextProvider = ({ children }) => {
 
   const apiKey = "6e75a0730264c2386f68ef0d04cad813";
   // Current weather data API url
-  const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
+  const urlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}&lang=hr`;
   // 5 days forecast data API url
-  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
+  const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}&lang=hr`;
 
   const searchLocation = (e) => {
     if (e.key === "Enter") {
@@ -66,7 +66,7 @@ export const ContextProvider = ({ children }) => {
     if (savedLocation !== null) {
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${savedLocation}&units=metric&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${savedLocation}&units=metric&appid=${apiKey}&lang=hr`
         )
         .then((res) => {
           setData(res.data);
@@ -77,7 +77,7 @@ export const ContextProvider = ({ children }) => {
       // Refresh local storage with new forecast if necessary
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${savedLocation}&units=metric&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${savedLocation}&units=metric&appid=${apiKey}&lang=hr`
         )
         .then((res) => {
           const filteredData = res.data.list.filter((item) =>
