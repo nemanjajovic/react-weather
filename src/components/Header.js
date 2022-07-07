@@ -3,28 +3,6 @@ import { useStateContext } from "../context/ContextProvider";
 const Header = () => {
   const { data } = useStateContext();
 
-  // Translate weather to Serbian
-  let translation = "";
-
-  // Check if data is fetched from API first, then do the logic
-  if (data.weather) {
-    switch (data.weather[0].main) {
-      case "Clear":
-        translation = "Suncano";
-        break;
-      case "Clouds":
-        translation = "Oblacno";
-        break;
-      case "Rain":
-        translation = "Kisovito";
-        break;
-
-      default:
-        translation = data.weather[0].main;
-        break;
-    }
-  }
-
   return (
     <>
       {/* Check if data is fetched from API first, then do the logic */}
@@ -46,7 +24,11 @@ const Header = () => {
             </div>
           </div>
           <div className="description">
-            <p>{translation}</p>
+            <p>
+              {/* Capitalize first letter */}
+              {data.weather[0].description.charAt(0).toUpperCase() +
+                data.weather[0].description.slice(1)}
+            </p>
           </div>
         </div>
       ) : null}
