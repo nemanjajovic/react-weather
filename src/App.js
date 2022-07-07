@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useStateContext } from "./context/ContextProvider";
 
 import CurrentWeather from "./pages/CurrentWeather";
 import WeekForecast from "./pages/WeekForecast";
@@ -6,10 +7,12 @@ import Search from "./components/Search";
 import Links from "./components/Links";
 
 function App() {
+  const { data } = useStateContext();
   return (
     <div className="app noselect">
       <Search />
-      <Links />
+      {data.main ? <Links /> : null}
+
       <div className="container">
         <Routes>
           <Route path="/" element={<CurrentWeather />} />
